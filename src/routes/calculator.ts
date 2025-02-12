@@ -35,3 +35,18 @@ calculator.get("/stateless-add", (c) => {
     result: state,
   });
 });
+
+calculator.get("/crash", (c) => {
+  console.log({ message: "Shutdown Bra" });
+  process.exit();
+});
+
+calculator.get("/stress", (c) => {
+  function stressCPU() {
+    while (true) {
+      Math.pow(Math.random(), Math.random());
+    }
+  }
+
+  return c.json({ message: "stressing CPU" });
+});
